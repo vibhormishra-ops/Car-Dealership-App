@@ -1,0 +1,37 @@
+{
+  "name": "cars24",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "@tanstack/react-query": "^5.90.20",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "flowbite": "^4.0.1",
+    "flowbite-react": "^0.12.16",
+    "next": "16.1.4",
+    "postgres": "^3.4.8",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "swiper": "^12.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.19.30",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.4",
+    "prisma": "^7.3.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

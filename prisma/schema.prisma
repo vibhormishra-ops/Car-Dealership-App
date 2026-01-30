@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+enum Role {
+  ADMIN
+  SELLER
+  BUYER
+}
+
+enum CarStatus {
+  AVAILABLE
+  SOLD
+  RESERVED
+}
+
+model User {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  passwordHash  String
+  createdAt     DateTime @default(now())
+  cars          Car[]
+  sessions      Session[]
+  favorites     Favorite[]
+}
+
+model Car {
+  id          String    @id @default(uuid())
+  title       String
+  brand       String
+  model       String
+  year        Int
+  price       Int
+  mileage     Int
+  color       String?
+  description String?
+  imageURL    String     @default("")
+
+  status      CarStatus @default(AVAILABLE)
+  favoritedBy Favorite[]
+  createdAt  DateTime  @default(now())
+  sellerId   String
+  seller     User      @relation(fields: [sellerId], references:[id])
+}
+
+model Session{
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+model Favorite{
+  id        String    @id @default(uuid())
+  userId    String
+  carId     String    
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car  Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, carId]) // prevents duplicate favorites
+  @@index([userId])
+  @@index([carId])
+
+}
