@@ -2,7 +2,9 @@
 import {useUI} from "@/context/UIContext"
 import {useAuth} from "@/context/AuthContext"
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 export default function LoginModal(){
+    const router=useRouter();
     const {isLoginOpen, closeLogin}=useUI();
     const {login}=useAuth();
     const [username, setUsername]=useState("");
@@ -11,9 +13,9 @@ export default function LoginModal(){
     if(!isLoginOpen) return null;
     const handleLogin= async ()=>{
         setError("");
-        const res=await fetch("api/auth/login", {
+        const res=await fetch("/api/auth/login", {
             method: "POST",
-            headers:{"Content-Type": "application/json"},
+            headers:{"Content-Type": "application/jsonja"},
             body: JSON.stringify({username,password}),
         });
         const data=await res.json();
@@ -22,6 +24,9 @@ export default function LoginModal(){
             return;
         }
         login({id: data.id, username: data.username});
+        
+        console.log("data user"+ data.username);
+        router.refresh();
         closeLogin();
     }
     return (

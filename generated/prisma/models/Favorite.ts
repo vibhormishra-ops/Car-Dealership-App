@@ -223,14 +223,14 @@ export type FavoriteScalarWhereWithAggregatesInput = {
 export type FavoriteCreateInput = {
   id?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutFavoritesInput
-  car: Prisma.CarCreateNestedOneWithoutFavoritedByInput
+  user?: Prisma.UserCreateNestedOneWithoutFavoritesInput
+  car?: Prisma.CarCreateNestedOneWithoutFavoritedByInput
 }
 
 export type FavoriteUncheckedCreateInput = {
   id?: string
-  userId: string
-  carId: string
+  userId?: string
+  carId?: string
   createdAt?: Date | string
 }
 
@@ -250,8 +250,8 @@ export type FavoriteUncheckedUpdateInput = {
 
 export type FavoriteCreateManyInput = {
   id?: string
-  userId: string
-  carId: string
+  userId?: string
+  carId?: string
   createdAt?: Date | string
 }
 
@@ -390,12 +390,12 @@ export type FavoriteUncheckedUpdateManyWithoutCarNestedInput = {
 export type FavoriteCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
-  car: Prisma.CarCreateNestedOneWithoutFavoritedByInput
+  car?: Prisma.CarCreateNestedOneWithoutFavoritedByInput
 }
 
 export type FavoriteUncheckedCreateWithoutUserInput = {
   id?: string
-  carId: string
+  carId?: string
   createdAt?: Date | string
 }
 
@@ -437,12 +437,12 @@ export type FavoriteScalarWhereInput = {
 export type FavoriteCreateWithoutCarInput = {
   id?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutFavoritesInput
+  user?: Prisma.UserCreateNestedOneWithoutFavoritesInput
 }
 
 export type FavoriteUncheckedCreateWithoutCarInput = {
   id?: string
-  userId: string
+  userId?: string
   createdAt?: Date | string
 }
 
@@ -473,7 +473,7 @@ export type FavoriteUpdateManyWithWhereWithoutCarInput = {
 
 export type FavoriteCreateManyUserInput = {
   id?: string
-  carId: string
+  carId?: string
   createdAt?: Date | string
 }
 
@@ -497,7 +497,7 @@ export type FavoriteUncheckedUpdateManyWithoutUserInput = {
 
 export type FavoriteCreateManyCarInput = {
   id?: string
-  userId: string
+  userId?: string
   createdAt?: Date | string
 }
 

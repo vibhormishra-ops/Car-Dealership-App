@@ -63,14 +63,14 @@ model Session{
 
 model Favorite{
   id        String    @id @default(uuid())
-  userId    String
-  carId     String    
+  userId    String    @default("")
+  carId     String    @default("")
   createdAt DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   car  Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, carId]) // prevents duplicate favorites
+  @@unique([userId, carId])
   @@index([userId])
   @@index([carId])
 

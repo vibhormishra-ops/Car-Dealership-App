@@ -1,5 +1,7 @@
 "use client"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 export interface User{
     id: string;
     username: string;
@@ -28,6 +30,7 @@ const AuthContext=createContext<AuthContextType| undefined>(undefined);
 export function AuthProvider({
     children
 }:{children: ReactNode}){
+    const router=useRouter();
     const [user,setUser]=useState<User | null>(null);
     useEffect(()=>{
         fetch("api/auth/me")
@@ -43,6 +46,7 @@ export function AuthProvider({
     const logout= async()=>{
         await fetch("api/auth/logout", {method:"POST"});
         setUser(null);
+        router.refresh();
     }
     return(
         <AuthContext.Provider value={{user,login,logout}}>{children}</AuthContext.Provider>
