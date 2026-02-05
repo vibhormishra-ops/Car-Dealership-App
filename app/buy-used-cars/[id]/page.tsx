@@ -74,10 +74,10 @@ export default async function page({
           </div>
         </div>
       </div>
-      <div className="p-8">
+      <div className="p-13">
         <CardCarousel />
       </div>
-      <div className="p-8">
+      <div className="p-13">
         <SlidingCarousel />
       </div>
     </div>

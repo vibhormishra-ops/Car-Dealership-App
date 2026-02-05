@@ -10,10 +10,10 @@ const page = () => {
       <div className="p-8">
         <CardCarousel />
       </div>
-      <div className="p-8">
+      <div className="p-13">
         <SlidingCarousel />
       </div>
-      <div className="p-8">
+      <div className="p-13">
         <FlowbiteCarousel />
       </div>
       <div className="flex flex-col p-8 text-black gap-4">
