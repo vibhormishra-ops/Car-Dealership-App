@@ -38,9 +38,9 @@ const FlowbiteCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const extendedCards = [
-    cards[cards.length - 1], // Clone of last item at start
+    cards[cards.length - 1],
     ...cards,
-    cards[0], // Clone of first item at end
+    cards[0],
   ];
 
   const handleNext = useCallback(() => {
@@ -53,27 +53,23 @@ const FlowbiteCarousel = () => {
     setIndex((prev) => prev - 1);
   }, []);
 
-  // Handle the infinite loop logic
   useEffect(() => {
-    // If we've reached the clone at the end
     if (index === extendedCards.length - 1) {
       const timer = setTimeout(() => {
         setShouldAnimate(false);
-        setIndex(1); // Jump to real first slide without animation
-      }, 500); // Wait for transition to complete
+        setIndex(1);
+      }, 500);
       return () => clearTimeout(timer);
     }
-    // If we've reached the clone at the start
     else if (index === 0) {
       const timer = setTimeout(() => {
         setShouldAnimate(false);
-        setIndex(cards.length); // Jump to real last slide without animation
-      }, 500); // Wait for transition to complete
+        setIndex(cards.length);
+      }, 500);
       return () => clearTimeout(timer);
     }
-  }, [index, extendedCards.length, cards.length]);
+  }, [index, extendedCards.length]);
 
-  // Auto-play functionality (optional)
   useEffect(() => {
     const autoPlay = setInterval(() => {
       handleNext();
