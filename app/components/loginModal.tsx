@@ -1,8 +1,9 @@
 "use client";
 import { useUI } from "@/context/UIContext";
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+
 export default function LoginModal() {
   const router = useRouter();
   const { isLoginOpen, closeLogin } = useUI();
@@ -10,8 +11,8 @@ export default function LoginModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  if (!isLoginOpen) return null;
-  const handleLogin = async () => {
+
+  const handleLogin = useCallback(async () => {
     setError("");
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -28,7 +29,10 @@ export default function LoginModal() {
     console.log("data user" + data.username);
     router.refresh();
     closeLogin();
-  };
+  }, [username, password, login, router, closeLogin]);
+
+  if (!isLoginOpen) return null;
+
   return (
     <>
       <div

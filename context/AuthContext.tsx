@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from "react";
 import { useRouter } from "next/navigation";
 
@@ -36,6 +37,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+
   useEffect(() => {
     fetch("/api/auth/me")
       .then((res) => res.json())
@@ -44,14 +46,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
       .catch(() => setUser(null));
   }, []);
-  const login = (user: User) => {
+
+  const login = useCallback((user: User) => {
     setUser(user);
-  };
-  const logout = async () => {
+  }, []);
+
+  const logout = useCallback(async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
     router.refresh();
-  };
+  }, [router]);
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}

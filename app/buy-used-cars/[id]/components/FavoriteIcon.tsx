@@ -1,11 +1,13 @@
 "use client";
 import { useOptimistic, startTransition } from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+
 interface Props {
   carId: string;
   initialFavorited: boolean;
   disabled?: boolean;
 }
+
 // const user=await getSessionUser();
 export default function FavoriteIcon({
   carId,
@@ -18,7 +20,8 @@ export default function FavoriteIcon({
     confirmedFavorited,
     (_, next: boolean) => next,
   );
-  const toggleFavorite = async () => {
+
+  const toggleFavorite = useCallback(async () => {
     if (disabled) return;
     const nextValue = !optimisticFavorited;
     console.log(carId);
@@ -37,7 +40,8 @@ export default function FavoriteIcon({
       return;
     }
     setConfirmedFavorited(nextValue);
-  };
+  }, [disabled, optimisticFavorited, carId, setOptimisticFavorited, confirmedFavorited]);
+
   return (
     <button
       onClick={toggleFavorite}

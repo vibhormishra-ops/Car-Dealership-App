@@ -4,10 +4,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useUI } from "@/context/UIContext";
 import Link from "next/link";
 const Navbar = () => {
-  //this function will essentially return the login modal that will be displayed and blur will open up on rest of the app.
   const { user, logout } = useAuth();
   const { openLogin } = useUI();
-  console.log(user?.username);
   return (
     <div className="bg-white flex h-20 border-b items-center sticky top-0 z-9999 text-black justify-between p-4">
       <div className="flex gap-10">
@@ -53,6 +51,4 @@ const Navbar = () => {
     </div>
   );
 };
-
-//create a context based on which stores userLoggedIn if user has not logged in navbar shows login button which will open up a modal and blur rest of the screen when opened up, if user is logged in then we will just display the user details in the navbar like "Hello, {user}"
 export default Navbar;

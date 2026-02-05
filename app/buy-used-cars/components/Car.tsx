@@ -1,4 +1,3 @@
-"use Client";
 type CarCardProps = {
   id: string;
   title: string;
@@ -9,7 +8,6 @@ type CarCardProps = {
   mileage: number;
   fuelType?: "PETROL" | "DIESEL" | "ELECTRIC";
   imageURL: string;
-  // onView?: (carId: string) => void
 };
 
 export function Car({
@@ -22,7 +20,6 @@ export function Car({
   mileage,
   fuelType = "PETROL",
   imageURL,
-  // onView,
 }: CarCardProps) {
   return (
     <div className="bg-white rounded-lg shadow hover:shadow-md transition">
@@ -47,7 +44,6 @@ export function Car({
           <span className="text-lg font-bold">₹{price.toLocaleString()}</span>
 
           <button
-            // onClick={() => onView?.(id)}
             className="text-sm px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
             View

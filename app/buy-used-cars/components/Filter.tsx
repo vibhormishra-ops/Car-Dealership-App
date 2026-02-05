@@ -1,19 +1,25 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 export default function Filter() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const updateParam = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
-    router.push(`/buy-used-cars?${params.toString()}`);
-  };
+
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+      router.push(`/buy-used-cars?${params.toString()}`);
+    },
+    [searchParams, router]
+  );
+
   return (
     <div className="w-72 bg-white border-r p-6">
       <h2 className="text-xl font-semibold mb-6">Filters</h2>
