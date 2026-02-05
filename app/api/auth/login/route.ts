@@ -2,7 +2,8 @@ export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt.js";
+import {compare, hash} from "bcrypt-ts";
 import { createSession } from "@/lib/session";
 import { loginSchema } from "@/lib/validators/auth";
 
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
       where: { username },
     });
     if (!existingUser) {
-      const passwordHash = await bcrypt.hash(password, 10);
+      const passwordHash = await hash(password, 10);
       const newUser = await prisma.user.create({
         data: {
           username,
@@ -45,7 +46,7 @@ export async function POST(req: Request) {
         username: newUser.username,
       });
     }
-    const isValid = await bcrypt.compare(password, existingUser.passwordHash);
+    const isValid = await compare(password, existingUser.passwordHash);
     if (!isValid) {
       return NextResponse.json(
         { error: "Invalid Credentials" },
