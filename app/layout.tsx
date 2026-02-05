@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "flowbite"
+import "flowbite";
 import "./globals.css";
 import { Providers } from "./providers";
-import Navbar from "./components/layout/Navbar"
+import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import LoginModal from "./components/loginModal";
 
@@ -29,13 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Providers>
-          <LoginModal/>
-          <Navbar/>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
+          <LoginModal />
+          <Navbar />
           {children}
-          <Footer/>
-          </Providers>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 const cards = [
-  { id: 1, title: 'Card 1' },
-  { id: 2, title: 'Card 2' },
-  { id: 3, title: 'Card 3' },
-  { id: 4, title: 'Card 4' },
-  { id: 5, title: 'Card 5' },
-  { id: 6, title: 'Card 6' },
-]
+  { id: 1, title: "Card 1" },
+  { id: 2, title: "Card 2" },
+  { id: 3, title: "Card 3" },
+  { id: 4, title: "Card 4" },
+  { id: 5, title: "Card 5" },
+  { id: 6, title: "Card 6" },
+];
 
-const CARD_WIDTH = 552
+const CARD_WIDTH = 552;
 
 export default function SlidingCarousel() {
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
 
   const handleNext = () => {
-    setIndex((prev) => (prev + 1) % cards.length)
-  }
+    setIndex((prev) => (prev + 1) % cards.length);
+  };
 
   const handlePrev = () => {
-    setIndex((prev) => (prev - 1 + cards.length) % cards.length)
-  }
+    setIndex((prev) => (prev - 1 + cards.length) % cards.length);
+  };
 
   return (
     <div className="w-full mx-auto">
@@ -47,9 +47,19 @@ export default function SlidingCarousel() {
         </div>
       </div>
       <div className="flex justify-between mt-4">
-        <button className='text-black bg-gray-200 px-4 py-2 rounded-lg hover: shadow-2xl hover:bg-gray-400' onClick={handlePrev}>Prev</button>
-        <button className='text-black bg-gray-200 px-4 py-2 rounded-lg hover: shadow-2xl hover:bg-gray-400' onClick={handleNext}>Next</button>
+        <button
+          className="text-black bg-gray-200 px-4 py-2 rounded-lg hover: shadow-2xl hover:bg-gray-400"
+          onClick={handlePrev}
+        >
+          Prev
+        </button>
+        <button
+          className="text-black bg-gray-200 px-4 py-2 rounded-lg hover: shadow-2xl hover:bg-gray-400"
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
     </div>
-  )
+  );
 }

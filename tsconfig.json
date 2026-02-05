@@ -33,6 +33,3 @@
   "exclude": ["node_modules"],
   "type": "module"
 }
-
-
-

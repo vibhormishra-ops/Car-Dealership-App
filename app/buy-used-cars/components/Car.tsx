@@ -1,16 +1,16 @@
-"use Client"
+"use Client";
 type CarCardProps = {
-  id: string
-  title: string
-  brand: string
-  model: string
-  year: number
-  price: number
-  mileage: number
-  fuelType?: 'PETROL' | 'DIESEL' | 'ELECTRIC'
-  imageURL: string
+  id: string;
+  title: string;
+  brand: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType?: "PETROL" | "DIESEL" | "ELECTRIC";
+  imageURL: string;
   // onView?: (carId: string) => void
-}
+};
 
 export function Car({
   id,
@@ -20,12 +20,11 @@ export function Car({
   year,
   price,
   mileage,
-  fuelType = 'PETROL',
+  fuelType = "PETROL",
   imageURL,
   // onView,
 }: CarCardProps) {
   return (
-    
     <div className="bg-white rounded-lg shadow hover:shadow-md transition">
       <img
         src={imageURL}
@@ -34,9 +33,7 @@ export function Car({
       />
 
       <div className="p-4">
-        <h3 className="font-semibold text-lg">
-          {title}
-        </h3>
+        <h3 className="font-semibold text-lg">{title}</h3>
 
         <p className="text-sm text-gray-500">
           {brand} {model} • {year}
@@ -47,9 +44,7 @@ export function Car({
         </p>
 
         <div className="mt-3 flex justify-between items-center">
-          <span className="text-lg font-bold">
-            ₹{price.toLocaleString()}
-          </span>
+          <span className="text-lg font-bold">₹{price.toLocaleString()}</span>
 
           <button
             // onClick={() => onView?.(id)}
@@ -60,5 +55,5 @@ export function Car({
         </div>
       </div>
     </div>
-  )
+  );
 }
