@@ -36,7 +36,7 @@ export default function SlidingCarousel() {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="w-134 shrink-0 p-3 m-2
+              className="w-132 shrink-0 p-3 m-2
                        rounded-lg shadow
                          flex items-center justify-center
                          text-center wrap-break-word text-black bg-white hover:shadow-2xl"
