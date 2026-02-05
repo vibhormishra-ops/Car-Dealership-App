@@ -1,5 +1,13 @@
 "use client";
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+
 interface UIContextType {
   isLoginOpen: boolean;
   openLogin: () => void;
@@ -9,11 +17,24 @@ const UIContext = createContext<UIContextType | undefined>(undefined);
 
 export function UIProvider({ children }: { children: ReactNode }) {
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
-  const value: UIContextType = {
-    isLoginOpen,
-    openLogin: () => setIsLoginOpen(true),
-    closeLogin: () => setIsLoginOpen(false),
-  };
+
+  const openLogin = useCallback(() => {
+    setIsLoginOpen(true);
+  }, []);
+
+  const closeLogin = useCallback(() => {
+    setIsLoginOpen(false);
+  }, []);
+
+  const value: UIContextType = useMemo(
+    () => ({
+      isLoginOpen,
+      openLogin,
+      closeLogin,
+    }),
+    [isLoginOpen, openLogin, closeLogin]
+  );
+
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 }
 

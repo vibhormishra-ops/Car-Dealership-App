@@ -1,5 +1,3 @@
-"use client";
-
 import CardCarousel from "./components/CardCarousel";
 import SlidingCarousel from "./components/Carousel";
 import FlowbiteCarousel from "./components/FlowbiteCarousel";
