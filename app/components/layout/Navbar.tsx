@@ -27,10 +27,12 @@ const Navbar = () => {
       </div>
       {user ? (
         <div className="flex gap-8">
+          <Link href={`/user-details/${user?.id}`}>
           <span className="text-black text-xl font-bold hover:text-blue-600 hover:border-b-blue-600 hover:border-b-2">
             {" "}
             Hi, {user?.username}
           </span>
+          </Link>
           <button
             className="text-black text-xl font-bold hover:text-blue-600 hover:border-b-blue-600 hover:border-b-2"
             onClick={logout}

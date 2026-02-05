@@ -63,7 +63,6 @@ export default function CardCarousel() {
       <h1 className="text-black text-4xl">
         Hear from our trusted Customers...
       </h1>
-      {/* Cards */}
       <div className="flex gap-4">
         {visibleCards.map((card) => (
           <div
@@ -76,7 +75,6 @@ export default function CardCarousel() {
         ))}
       </div>
 
-      {/* Controls */}
       <div className="flex gap-4">
         <button
           onClick={handlePrev}

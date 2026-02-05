@@ -19,7 +19,6 @@ export default async function page({
   }
   const { id } = parsed.data;
   const user = await getSessionUser();
-  console.log(user?.username);
   const car = await prisma.car.findUnique({
     where: { id: id },
     include: {
