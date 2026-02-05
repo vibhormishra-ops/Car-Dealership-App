@@ -12,7 +12,7 @@ interface Filters {
 
 export default async function BuyUsedCars({ filters }: { filters: Filters }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const where: any = {
+  const where:any = {
     status: "AVAILABLE",
   };
   if (filters.brand) {
