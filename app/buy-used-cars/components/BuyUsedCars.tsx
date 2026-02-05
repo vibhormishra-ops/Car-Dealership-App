@@ -5,9 +5,9 @@ import { Suspense } from "react";
 import Loading from "../../Loading";
 interface Filters{
         brand?: string;
-        minPrice?: string;
-        maxPrice?: string;
-        year?: string;
+        minPrice?: number;
+        maxPrice?: number;
+        year?: number;
 }
 
 export default async function BuyUsedCars({filters}:{filters:Filters}){

@@ -5,14 +5,21 @@ import CardCarousel from "@/app/components/CardCarousel"
 import SlidingCarousel from "@/app/components/Carousel";
 import { getSessionUser } from "@/lib/session";
 import FavoriteIcon from "./components/FavoriteIcon";
+import { carIdParamsSchema } from "@/lib/validators/params";
 // import Image from "next/image";
 export default async function page({
     params
 }: {
     params:Promise<{id:string}>;
 }){
-    const {id}=await params;
+    const rawParams=await params;
+    const parsed=carIdParamsSchema.safeParse(rawParams);
+    if(!parsed.success){
+        notFound();
+    }
+    const {id}=parsed.data;
     const user=await getSessionUser();
+    console.log(user?.username);
     const car=await prisma.car.findUnique({
         where: {id: id},
         include:{
@@ -26,7 +33,6 @@ export default async function page({
 
     const isFavorited= Boolean(user && car.favoritedBy.length>0);
     // console.log("isFavorited "+isFavorited);
-
     return(
         <div className="flex flex-col gap-10 bg-gray-100">
         <div className="flex gap-10 bg-gray-100">

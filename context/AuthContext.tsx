@@ -33,7 +33,7 @@ export function AuthProvider({
     const router=useRouter();
     const [user,setUser]=useState<User | null>(null);
     useEffect(()=>{
-        fetch("api/auth/me")
+        fetch("/api/auth/me")
         .then((res)=> res.json())
         .then((data)=>{
             if(data) setUser(data);
@@ -44,7 +44,7 @@ export function AuthProvider({
         setUser(user);
     }
     const logout= async()=>{
-        await fetch("api/auth/logout", {method:"POST"});
+        await fetch("/api/auth/logout", {method:"POST"});
         setUser(null);
         router.refresh();
     }

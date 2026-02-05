@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import {prisma} from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { createSession } from "@/lib/session";
-// import { error } from "console";
+import { loginSchema } from "@/lib/validators/auth";
 
 interface LoginBody{
     username: string;
@@ -14,7 +14,14 @@ interface LoginBody{
 export async function POST(req: Request){
     try{
         const body: LoginBody= await req.json();
-        const {username, password} = body;
+        const parsed=loginSchema.safeParse(body);
+        if(!parsed.success){
+            return NextResponse.json(
+                {errors: "Bad Request as per Password"},
+                {status:400}
+            );
+        }
+        const {username, password} = parsed.data;
         if(!username || !password){
             return NextResponse.json(
                 {error: "Missing Credentials"},
@@ -32,6 +39,7 @@ export async function POST(req: Request){
                     passwordHash,
                 }
             });
+            await createSession(newUser.id);
             return NextResponse.json({
                 id: newUser.id,
                 username: newUser.username,

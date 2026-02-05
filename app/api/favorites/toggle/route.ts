@@ -1,14 +1,19 @@
 import {prisma} from "@/lib/prisma"
 import { getSessionUser } from "@/lib/session"
+import { toggleFavoriteSchema } from "@/lib/validators/favorite";
 import { NextResponse } from "next/server"
 
 export async function POST(req:Request){
     const user=await getSessionUser();
-    console.log(user?.username);
     if(!user){
         return NextResponse.json({error:"Unauthorized"},{status:401})
     }
-    const {carId}=await req.json();
+    const body=await req.json();
+    const parsed=toggleFavoriteSchema.safeParse(body);
+    if(!parsed.success){
+        return NextResponse.json({error:"Invalid CarId"},{status:400});
+    }
+    const {carId}=parsed.data;
     if(!carId){
         return NextResponse.json({error:"Missing CarId"},{status:400});
     }

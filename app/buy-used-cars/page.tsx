@@ -1,3 +1,4 @@
+import { carFilterSchema } from "@/lib/validators/filter";
 import BuyUsedCars from "./components/BuyUsedCars";
 import Filter from "./components/Filter";
 
@@ -11,7 +12,9 @@ export default async function page({
     year?:string;
   }>
 }) {
-  const resolvedSearchParams=await searchParams;
+  const rawParams=await searchParams;
+  const parsed=carFilterSchema.safeParse(rawParams);
+  const resolvedSearchParams=parsed.success ? parsed.data : {};
   return (
     <div className="bg-gray-100 text-gray-800">
     <div className="flex min-h-screen">

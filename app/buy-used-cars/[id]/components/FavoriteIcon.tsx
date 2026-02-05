@@ -6,22 +6,20 @@ interface Props{
     initialFavorited: boolean;
     disabled?: boolean;
 }
-
+// const user=await getSessionUser();
 export default function FavoriteIcon({carId, initialFavorited, disabled=false}: Props){
     const [confirmedFavorited,setConfirmedFavorited]=useState(initialFavorited);
     const [optimisticFavorited, setOptimisticFavorited]=useOptimistic(confirmedFavorited, (_,next: boolean)=>next);
     const toggleFavorite= async ()=> {
         if(disabled) return;
         const nextValue=!optimisticFavorited;
-        
+        console.log(carId);
         startTransition(()=> { setOptimisticFavorited(nextValue)});
-        console.log(optimisticFavorited);
         const res=await fetch("/api/favorites/toggle", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({carId}),
         });
-        console.log("what is the result " + res.ok);
         if(!res.ok){
             startTransition(()=> { setOptimisticFavorited(confirmedFavorited)});
             return;

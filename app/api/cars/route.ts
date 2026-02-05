@@ -1,8 +1,16 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
+import { sellCarSchema } from '@/lib/validators/car';
 export async function POST(req: Request){
   try{
     const body=await req.json();
+    const parsed=sellCarSchema.safeParse(body);
+    if(!parsed.success){
+      return NextResponse.json(
+        {errors:"Bad Request"},
+        {status:400}
+      );
+    }
     const {
       title,
       brand,
@@ -14,13 +22,13 @@ export async function POST(req: Request){
       description,
       sellerId,
       imageURL
-    }=body;
-    if(!title || !brand || !year || !price || !mileage ||!sellerId || !model || !imageURL){
-      return NextResponse.json(
-        {error:"Missing Required Fields"},
-        {status: 400}
-      );
-    }
+    }=parsed.data;
+    // if(!title || !brand || !year || !price || !mileage ||!sellerId || !model || !imageURL){
+    //   return NextResponse.json(
+    //     {error:"Missing Required Fields"},
+    //     {status: 400}
+    //   );
+    // }
     const car= await prisma.car.create({
       data: {
         title,
