@@ -9,7 +9,7 @@ export default async function page({params}:{params:Promise<{id:string}>}){
     const rawParams=await params;
     const parsed=userParamsValidationSchema.safeParse(rawParams);
     if(!parsed.success){
-        console.log("Not found");
+        // console.log("Not found");
         notFound();
     }
     const {userId}=parsed.data;
